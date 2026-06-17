@@ -287,6 +287,7 @@ CONFOPTS="\
   -D Trilinos_VERBOSE_CONFIGURE:BOOL=OFF \
   -D Trilinos_ENABLE_EXPLICIT_INSTANTIATION=ON \
   -D Trilinos_ENABLE_FLOAT=ON \
+  -D Trilinos_ENABLE_THREAD_SAFE=ON \
   -D Trilinos_ENABLE_Amesos:BOOL=ON \
   -D Trilinos_ENABLE_Epetra:BOOL=ON \
   -D Trilinos_ENABLE_EpetraExt:BOOL=ON \
