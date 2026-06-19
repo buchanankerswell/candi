@@ -77,6 +77,11 @@ if [ ${USE_KOKKOS_WITH_HIP} = ON ]; then
     # you need a special MPI version to enable DEAL_II_MPI_WITH_DEVICE_SUPPORT
 fi
 
+if [ ${USE_KOKKOS_WITH_SYCL} = ON ]; then
+    CONFOPTS="${CONFOPTS} \
+      -D CMAKE_CXX_COMPILER=icpx"
+fi
+
 # add the user-specified flags at the end (so things can be overriden):
 CONFOPTS="${CONFOPTS} \
 ${DEAL_II_CONFOPTS}"

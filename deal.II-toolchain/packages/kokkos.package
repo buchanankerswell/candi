@@ -28,6 +28,13 @@ if [ ${USE_KOKKOS_WITH_HIP} = ON ]; then
   -D CMAKE_PREFIX_PATH=${ROCM_HOME} \
   -D CMAKE_CXX_COMPILER=hipcc"
 fi
+if [ ${USE_KOKKOS_WITH_SYCL} = ON ]; then
+    CONFOPTS="${CONFOPTS} \
+  -D Kokkos_ENABLE_SYCL=ON \
+  -D Kokkos_ENABLE_OPENMP=ON \
+  -D Kokkos_ARCH_INTEL_GEN=ON \
+  -D CMAKE_CXX_COMPILER=icpx"
+fi
 
 package_specific_register () {
     export KOKKOS_DIR=${INSTALL_PATH}
