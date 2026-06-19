@@ -108,7 +108,7 @@ fi
 
 ################################################################################
 # Handle Homebrew HDF5 conflicts on macOS with robust cleanup
-if [ "$(machine)" = "arm64e" ]; then
+if [ "$(uname -s)" = "Darwin" ] && [ "$(uname -m)" = "arm64" ]; then
     HDF5_WAS_UNLINKED_BY_DEALII=false
 
     # Cleanup function for HDF5
