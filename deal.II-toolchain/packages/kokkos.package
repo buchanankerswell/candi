@@ -13,7 +13,7 @@ BUILDDIR=${BUILD_PATH}/kokkos-${VERSION}
 
 BUILDCHAIN=cmake
 
-CONFOPTS="-D BUILD_SHARED_LIBS=ON"
+CONFOPTS="-D BUILD_SHARED_LIBS=ON ${USE_KOKKOS_ARCH}"
 
 if [ ${USE_KOKKOS_WITH_CUDA} = ON ]; then
     CONFOPTS="${CONFOPTS} \
@@ -27,6 +27,11 @@ if [ ${USE_KOKKOS_WITH_HIP} = ON ]; then
   -D Kokkos_ENABLE_ROCTHRUST=OFF \
   -D CMAKE_PREFIX_PATH=${ROCM_HOME} \
   -D CMAKE_CXX_COMPILER=hipcc"
+fi
+if [ ${USE_KOKKOS_WITH_SYCL} = ON ]; then
+    CONFOPTS="${CONFOPTS} \
+  -D Kokkos_ENABLE_SYCL=ON \
+  -D CMAKE_CXX_COMPILER=icpx"
 fi
 
 package_specific_register () {

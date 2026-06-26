@@ -32,6 +32,11 @@ if [ ${USE_KOKKOS_WITH_HIP} = ON ]; then
     -D CMAKE_CXX_COMPILER=hipcc"
 fi
 
+if [ ${USE_KOKKOS_WITH_SYCL} = ON ]; then
+    CONFOPTS="${CONFOPTS} \
+    -D CMAKE_CXX_COMPILER=icpx"
+fi
+
 package_specific_register () {
   export KOKKOSKERNELS_DIR=${INSTALL_PATH}
 }
