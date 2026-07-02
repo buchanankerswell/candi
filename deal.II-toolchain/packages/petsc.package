@@ -61,6 +61,7 @@ CONFOPTS="\
   --with-x=0 \
   --with-64-bit-indices=${with64bit}"
 
+gpu_aware_mpi=0
 
 if [ ${USE_KOKKOS_WITH_CUDA} = ON ]; then
 CONFOPTS="\
@@ -73,6 +74,7 @@ CONFOPTS="\
   --with-kokkos-dir=${KOKKOS_DIR} \
   --with-kokkos-kernels-dir=${KOKKOSKERNELS_DIR} \
   "
+  gpu_aware_mpi=1
 fi
 if [ ${USE_KOKKOS_WITH_HIP} = ON ]; then
 CONFOPTS="\
@@ -87,7 +89,14 @@ CONFOPTS="\
   --with-kokkos-dir=${KOKKOS_DIR} \
   --with-kokkos-kernels-dir=${KOKKOSKERNELS_DIR} \
   "
+  gpu_aware_mpi=1
 fi
+
+if [ ${USE_DEVICE_AWARE_MPI} = OFF ]; then
+  gpu_aware_mpi=0
+fi
+
+CONFOPTS="${CONFOPTS} -use-gpu-aware-mpi=${gpu_aware_mpi}"
 
 # It would seem simpler to put the {C|CXX|F}OPTFLAGS directly into the
 # CONFOPTS variable, but there is no easy way to quote the
