@@ -65,27 +65,19 @@ CONFOPTS="\
 if [ ${USE_KOKKOS_WITH_CUDA} = ON ]; then
 CONFOPTS="\
   ${CONFOPTS} \
-  --with-kokkos=1 \
-  --with-kokkos-kernels=1 \
   --with-cuda=1 \
   --with-cuda-dir=${CUDA_HOME} \
   --with-cuda-arch=${CUDA_ARCH} \
-  --with-kokkos-dir=${KOKKOS_DIR} \
-  --with-kokkos-kernels-dir=${KOKKOSKERNELS_DIR} \
   "
 fi
 if [ ${USE_KOKKOS_WITH_HIP} = ON ]; then
 CONFOPTS="\
   ${CONFOPTS} \
   --with-cc=mpicc --with-cxx=mpicxx --with-fc=mpif90\
-  --with-kokkos=1 \
-  --with-kokkos-kernels=1 \
   --with-hip=1 \
   --with-hipcxxcompiler=hipcc \
   --with-hip-dir=${ROCM_HOME} \
   --with-fortran-bindings=0 \
-  --with-kokkos-dir=${KOKKOS_DIR} \
-  --with-kokkos-kernels-dir=${KOKKOSKERNELS_DIR} \
   "
 fi
 
