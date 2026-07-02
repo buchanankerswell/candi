@@ -13,9 +13,15 @@ INSTALL_PATH=${INSTALL_PATH}/hypre-${NAME}
 CONFOPTS="--enable-shared"
 if [ ${USE_KOKKOS_WITH_CUDA} = ON ]; then
   CONFOPTS="${CONFOPTS} --with-gpu-arch=${CUDA_ARCH} --with-cuda --enable-unified-memory"
+  if [ ${USE_DEVICE_AWARE_MPI} = ON ]; then
+    CONFOPTS="${CONFOPTS} --enable-gpu-aware-mpi"
+  fi
 fi
 if [ ${USE_KOKKOS_WITH_HIP} = ON ]; then
   CONFOPTS="${CONFOPTS} --with-hip --enable-unified-memory"
+  if [ ${USE_DEVICE_AWARE_MPI} = ON ]; then
+    CONFOPTS="${CONFOPTS} --enable-gpu-aware-mpi"
+  fi
 fi
 
 
