@@ -65,21 +65,19 @@ if [ ${USE_KOKKOS_WITH_CUDA} = ON ]; then
       -D DEAL_II_WITH_CUDA=OFF \
       -D DEAL_II_WITH_KOKKOS=ON \
       -D KOKKOS_DIR=${KOKKOS_DIR} \
-      -D DEAL_II_MPI_WITH_DEVICE_SUPPORT=OFF"
-    # you need a special MPI version to enable DEAL_II_MPI_WITH_DEVICE_SUPPORT
+      -D DEAL_II_MPI_WITH_DEVICE_SUPPORT=${USE_DEVICE_AWARE_MPI}"
 fi
 if [ ${USE_KOKKOS_WITH_HIP} = ON ]; then
     CONFOPTS="${CONFOPTS} \
       -D CMAKE_CXX_COMPILER=hipcc \
       -D DEAL_II_WITH_KOKKOS=ON \
       -D KOKKOS_DIR=${KOKKOS_DIR} \
-      -D DEAL_II_MPI_WITH_DEVICE_SUPPORT=OFF"
-    # you need a special MPI version to enable DEAL_II_MPI_WITH_DEVICE_SUPPORT
+      -D DEAL_II_MPI_WITH_DEVICE_SUPPORT=${USE_DEVICE_AWARE_MPI}"
 fi
-
 if [ ${USE_KOKKOS_WITH_SYCL} = ON ]; then
     CONFOPTS="${CONFOPTS} \
-      -D CMAKE_CXX_COMPILER=icpx"
+      -D CMAKE_CXX_COMPILER=icpx \
+      -D DEAL_II_MPI_WITH_DEVICE_SUPPORT=${USE_DEVICE_AWARE_MPI}"
 fi
 
 # add the user-specified flags at the end (so things can be overriden):
