@@ -24,6 +24,9 @@ if [ ${USE_KOKKOS_WITH_HIP} = ON ]; then
   fi
 fi
 
+if [ ${USE_64_BIT_INDICES} = ON ]; then
+  CONFOPTS="${CONFOPTS} --enable-mixedint"
+fi
 
 package_specific_register () {
     export HYPRE_DIR=${INSTALL_PATH}
