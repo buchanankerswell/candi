@@ -7,7 +7,15 @@ if [ -z "${TRILINOS_MAJOR_VERSION}" ]; then
 fi
 
 if [ ${TRILINOS_MAJOR_VERSION} = "AUTO" ]; then
-    TRILINOS_MAJOR_VERSION="16"
+    # Recent AppleClang/libc++ marks std::is_same with
+    # [[clang::no_specializations]], which breaks Trilinos < 17.2.1
+    # (see dealii/candi#458). Trilinos 17.2.1 contains the upstream fix,
+    # so default macOS builds to 17 and leave other systems on 16.
+    if [ "$(uname -s)" = "Darwin" ]; then
+        TRILINOS_MAJOR_VERSION="17"
+    else
+        TRILINOS_MAJOR_VERSION="16"
+    fi
 fi
 
 if [ ${TRILINOS_MAJOR_VERSION} = "DEV" ];then
@@ -22,7 +30,8 @@ if [ ${TRILINOS_MAJOR_VERSION} = "DEV" ];then
     PACKING=git
     SOURCE=https://github.com/trilinos/
 elif [ ${TRILINOS_MAJOR_VERSION} = "17" ]; then
-    VERSION=17-0-0;CHECKSUM=7adf56e4369749d01f9a7710f41457a2
+    VERSION=17-2-1;CHECKSUM=e23aa4a52e6cd86da853c63a0b07faef
+    # VERSION=17-0-0;CHECKSUM=7adf56e4369749d01f9a7710f41457a2
     SOURCE=https://github.com/trilinos/Trilinos/archive/
     NAME=trilinos-release-${VERSION}
     EXTRACTSTO=Trilinos-trilinos-release-${VERSION}
